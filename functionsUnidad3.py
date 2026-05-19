@@ -1,5 +1,5 @@
-
 import pandas as pd
+import joblib
 
 #Importa lecturas de CSV
 def importCsv(path):
@@ -17,4 +17,21 @@ def createCsv(path, dataframe, columns):
         return True
     else:
         return False
+    
+# Crea archivo persistente PKL
+def createPkl(path, dataframe):
+    if path != '' and len(dataframe) > 0:
+        path = path + ".pkl"
+        # compress=3 optimiza el peso del archivo sin perder rendimiento
+        joblib.dump(dataframe, path, compress=3)
+        return True
+    else:
+        return False
 
+# Importa archivo persistente PKL
+def importPkl(path):
+    if path != '':
+        path = path + ".pkl"
+        return joblib.load(path)
+    else:
+        return False
