@@ -32,7 +32,7 @@ createCsv(dfAmbientalesPath, df, colAmbientales)
 dfOperaciones = importCsv(dfOperacionesPath)
 dfAmbientales = importCsv(dfAmbientalesPath)
 
-createPkl('df_operaciones_persistente', dfOperaciones)
+createPkl('operacionesPersistente', dfOperaciones)
 
 dfOperaciones['fecha_registro'] = pd.to_datetime(dfOperaciones['fecha_registro'])
 dfSortOperaciones = dfOperaciones.sort_values('fecha_registro')
@@ -57,7 +57,7 @@ figure = make_subplots(
     horizontal_spacing=0.12,
 )
 
-for planta in enumerate(plantas):
+for index, planta in enumerate(plantas):
     dfPlanta = dfSortOperaciones[dfSortOperaciones['planta'] == planta]
 
     figure.add_trace(
