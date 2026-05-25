@@ -4,16 +4,16 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from scipy import stats
 
-dfOperacionesPath = 'dataset_operaciones'
-dfAmbientalesPath = 'dataset_ambientales'
+dfOperacionesPath = 'dataSets/dataset_operaciones'
+dfAmbientalesPath = 'dataSets/dataset_ambientales'
 
-from functionsUnidad3 import (
+from functions.functionsUnidad3 import (
     importCsv,
     createCsv,
     createPkl
 )
 
-df = importCsv('dataset_set_A_aguas_residuales')
+df = importCsv('dataSets/dataset_set_A_aguas_residuales')
 
 df['ratio_lodos_caudal'] = df['lodos_generados_kg_d'] / df['caudal_entrada_m3_d']
 df['cumplimiento_texto'] = np.where(df['cumplimiento_norma'] == 1, 'Cumple', 'No Cumple')
@@ -32,7 +32,7 @@ createCsv(dfAmbientalesPath, df, colAmbientales)
 dfOperaciones = importCsv(dfOperacionesPath)
 dfAmbientales = importCsv(dfAmbientalesPath)
 
-createPkl('operacionesPersistente', dfOperaciones)
+createPkl('./operacionesPersistente', dfOperaciones)
 
 dfOperaciones['fecha_registro'] = pd.to_datetime(dfOperaciones['fecha_registro'])
 dfSortOperaciones = dfOperaciones.sort_values('fecha_registro')
