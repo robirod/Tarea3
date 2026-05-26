@@ -15,6 +15,18 @@ from functions.functionsUnidad3 import (
 
 df = importCsv('dataSets/dataset_set_A_aguas_residuales')
 
+
+print("Revisión de calidad de datos")
+print("Datos nulos", end="\n")
+print(df.isnull().sum())
+
+print("Tipo de datos", end="\n")
+print(df.dtypes)
+
+print("Descripción de dataframe", end="\n")
+print(df.describe())
+
+
 df['ratio_lodos_caudal'] = df['lodos_generados_kg_d'] / df['caudal_entrada_m3_d']
 df['cumplimiento_texto'] = np.where(df['cumplimiento_norma'] == 1, 'Cumple', 'No Cumple')
 
@@ -44,6 +56,7 @@ dfSortAmbientales = dfAmbientales.sort_values('fecha_registro')
 
 dboSalidaArray = dfSortAmbientales['DBO_salida_mg_L'].to_numpy()
 sesgoDbo = stats.skew(dboSalidaArray)
+print(sesgoDbo)
 
 figure = make_subplots(
     rows=2, cols=2,
